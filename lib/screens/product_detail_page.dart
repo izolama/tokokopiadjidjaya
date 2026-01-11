@@ -5,6 +5,7 @@ import '../models/order.dart';
 import '../models/product.dart';
 import '../services/cart_controller.dart';
 import '../widgets/pressable_scale.dart';
+import '../widgets/coffee_hero_image.dart';
 import 'checkout_whatsapp.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -237,15 +238,13 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 opacity: _heroFade,
                 child: ScaleTransition(
                   scale: _heroScale,
-                  child: Hero(
-                    tag: 'hero_product_${product.id}',
-                    child: _DetailImageCarousel(
-                      imageUrls: imageUrls,
-                      controller: _pageController,
-                      pageOffset: _pageOffset,
-                      onChanged: (index) =>
-                          setState(() => _currentImage = index),
-                    ),
+                  child: _DetailImageCarousel(
+                    heroTag: 'hero_product_${product.id}',
+                    imageUrls: imageUrls,
+                    controller: _pageController,
+                    pageOffset: _pageOffset,
+                    onChanged: (index) =>
+                        setState(() => _currentImage = index),
                   ),
                 ),
               ),
@@ -379,12 +378,14 @@ class _ProductDetailPageState extends State<ProductDetailPage>
 
 class _DetailImageCarousel extends StatelessWidget {
   const _DetailImageCarousel({
+    required this.heroTag,
     required this.imageUrls,
     required this.controller,
     required this.pageOffset,
     required this.onChanged,
   });
 
+  final String heroTag;
   final List<String> imageUrls;
   final PageController controller;
   final double pageOffset;
@@ -450,17 +451,15 @@ class _DetailImageCarousel extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final delta = (pageOffset - index).clamp(-1.0, 1.0);
                   final translateX = delta * 10;
-                  return Center(
-                    child: Transform.translate(
-                      offset: Offset(translateX, 0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(22),
-                        child: Image.network(
-                          imageUrls[index],
-                          width: 160,
-                          height: 160,
-                          fit: BoxFit.cover,
-                        ),
+                  final tag = index == 0 ? heroTag : '${heroTag}_$index';
+                  return Transform.translate(
+                    offset: Offset(translateX, 0),
+                    child: SizedBox.expand(
+                      child: CoffeeHeroImage(
+                        heroTag: tag,
+                        imageProvider: NetworkImage(imageUrls[index]),
+                        radius: 28,
+                        aspectRatio: null,
                       ),
                     ),
                   );

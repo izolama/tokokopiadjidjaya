@@ -8,6 +8,7 @@ import '../services/auth_controller.dart';
 import '../services/cart_controller.dart';
 import '../services/firestore_service.dart';
 import '../widgets/pressable_scale.dart';
+import '../widgets/coffee_hero_image.dart';
 import 'checkout_whatsapp.dart';
 import 'product_detail_page.dart';
 
@@ -269,11 +270,21 @@ class _ProductCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Hero(
-                    tag: 'hero_product_${product.id}',
-                    child: _ProductThumbnail(
-                      imageUrl:
-                          product.imageUrls.isEmpty ? null : product.imageUrls.first,
+                  Container(
+                    width: 68,
+                    height: 68,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF1ECE7),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: const Color(0xFFE3DDD6)),
+                    ),
+                    child: CoffeeHeroImage(
+                      heroTag: 'hero_product_${product.id}',
+                      imageProvider: product.imageUrls.isEmpty
+                          ? null
+                          : NetworkImage(product.imageUrls.first),
+                      radius: 20,
+                      aspectRatio: 1,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -360,41 +371,6 @@ class _ProductCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _ProductThumbnail extends StatelessWidget {
-  const _ProductThumbnail({required this.imageUrl});
-
-  final String? imageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 68,
-      height: 68,
-      decoration: BoxDecoration(
-        color: const Color(0xFFF1ECE7),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFE3DDD6)),
-      ),
-      child: Center(
-        child: imageUrl == null
-            ? Icon(
-                Icons.local_cafe,
-                color: Theme.of(context).colorScheme.secondary,
-              )
-            : ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  imageUrl!,
-                  width: 68,
-                  height: 68,
-                  fit: BoxFit.cover,
-                ),
-              ),
       ),
     );
   }
