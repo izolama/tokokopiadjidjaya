@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "7542727252",
+    "project_id": "tokokopiadjidjaya",
+    "storage_bucket": "tokokopiadjidjaya.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7542727252:android:150e72292ec0a5a1ac03c1",
+        "android_client_info": {
+          "package_name": "id.tokokopiadjidjaya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7542727252-5dla9bodpc2ehims972ubpd6tvba2jof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.tokokopiadjidjaya",
+            "certificate_hash": "51793541392e913542494f82a037b98dc0fb82d5"
+          }
+        },
+        {
+          "client_id": "7542727252-59atfmm66kqvfjfertt778cmp9974nh5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5tekaweLL0G8_Dz0SnAaIMKLNPko5Yo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "7542727252-59atfmm66kqvfjfertt778cmp9974nh5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
